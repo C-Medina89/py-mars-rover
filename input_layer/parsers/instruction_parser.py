@@ -5,16 +5,16 @@ class InstructionParser:
      
     def parse_instructions(self, instruction_str):
     # This function will convert a string input such as "MLRLRM" to a list of instructions
-        Instructions_list = []
+        instructions_list = []
 
         for char in instruction_str.upper():
             if char == 'R':
-                Instructions_list.append(Instruction.RIGHT)
+                instructions_list.append(Instruction.RIGHT)
             elif char == 'L':
-                Instructions_list.append(Instruction.LEFT)
+                instructions_list.append(Instruction.LEFT)
             elif char == 'M':
-                Instructions_list.append(Instruction.MOVE)
+                instructions_list.append(Instruction.MOVE)
         
 
-        return Instructions_list
+        return instructions_list
 
