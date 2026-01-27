@@ -1,3 +1,6 @@
+from logic_layer.rover import Rover
+
+
 class MissionControl:
     def __init__(self, plateau):
         self.plateau = plateau
