@@ -53,15 +53,20 @@ class Rover:
         self.position.y = y
         print(f"After move: ({self.position.x}, {self.position.y})")
 
-    def process_instructions(self, instructions):
-    # process a list of instructionns for the rover
-    for instruction in instructions:
-        if instruction == Instruction.LEFT:
-            self.turn_left()
-        elif instruction == Instruction.RIGHT:
-            self.turn_right()
-        elif instruction == Instruction.MOVE:
-            self.next_move()
+    def process_instructions(self, instructions, plateau):
+        #Process instructions with plateau boundary checking
+        for instruction in instructions:
+            if instruction == Instruction.LEFT:
+                self.turn_left()
+            elif instruction == Instruction.RIGHT:
+                self.turn_right()
+            elif instruction == Instruction.MOVE:
+                current_x, current_y = self.position.x, self.position.y
+                self.next_move()
+                
+                # check if new position is within plateau bounds
+                if not plateau.is_rover_within_bounds(self.position.x, self.position.y):
+                    self.position.x, self.position.y = current_x, current_y
 
    
             
