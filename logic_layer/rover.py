@@ -53,34 +53,6 @@ class Rover:
         self.position.y = y
         print(f"After move: ({self.position.x}, {self.position.y})")
 
-    def process_instructions(self, instructions, plateau):
-        # process a list of instructionns for the rover
-
-        for instruction in instructions:
-            if instruction == Instruction.LEFT:
-                self.turn_left()
-            elif instruction == Instruction.RIGHT:
-                self.turn_right()
-            elif instruction == Instruction.MOVE:
-                print(f"Processing MOVE instruction")
-                # store current position
-                current_x, current_y =self.position.x, self.position.y
-
-                # calculate new position
-                self.next_move()
-
-                # check if new position is within plateau bounds
-                if not plateau.is_rover_within_bounds(self.position.x, self.position.y):
-                    # revert to previous position if out of bounds
-                    self.position.x, self.position.y = current_x, current_y
-                    continue
-                    # # Raise error
-                    # raise ValueError(f"Rover would move out of bounds to ({self.position.x}, {self.position.y})")
-
-                # Check collision with other rovers
-                if plateau.is_position_occupied(self.position.x, self.position.y, excluding_rover= self):
-                    self.position.x, self.position.y = current_x, current_y
-                    continue  
-            
+   
             
 
