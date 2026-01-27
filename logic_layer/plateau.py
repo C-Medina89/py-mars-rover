@@ -10,11 +10,13 @@ class Plateau:
     def is_rover_within_bounds(self, x: int, y: int)-> bool:
         return 0 <= x <= self.width and 0 <= y <= self.height
     
-    def is_position_occupied(self, x: int, y: int) -> bool:
-    for rover in self.rovers:
-        if rover.position.x == x and rover.position.y == y:
-            return True
-    return False
+    def is_position_occupied(self, x: int, y: int, excluding_rover=None):
+        for rover in self.rovers:
+            if rover is excluding_rover:
+                continue
+            if rover.position.x == x and rover.position.y == y:
+                return True
+        return False
     
     def add_rover(self, rover):
     # add rover to the plateau with boundary validation

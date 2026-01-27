@@ -63,9 +63,11 @@ class Rover:
             elif instruction == Instruction.MOVE:
                 current_x, current_y = self.position.x, self.position.y
                 self.next_move()
-                
+
                 # check if new position is within plateau bounds
                 if not plateau.is_rover_within_bounds(self.position.x, self.position.y):
+                    self.position.x, self.position.y = current_x, current_y
+                if plateau.is_position_occupied(self.position.x, self.position.y, excluding_rover=self):
                     self.position.x, self.position.y = current_x, current_y
 
    
