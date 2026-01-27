@@ -53,6 +53,16 @@ class Rover:
         self.position.y = y
         print(f"After move: ({self.position.x}, {self.position.y})")
 
+    def process_instructions(self, instructions):
+    # process a list of instructionns for the rover
+    for instruction in instructions:
+        if instruction == Instruction.LEFT:
+            self.turn_left()
+        elif instruction == Instruction.RIGHT:
+            self.turn_right()
+        elif instruction == Instruction.MOVE:
+            self.next_move()
+
    
             
 
