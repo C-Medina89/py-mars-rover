@@ -75,8 +75,9 @@ This project simulates NASA's Mars Rover mission control system. Rovers are depl
     For each rover, the program outputs its final position:
     <x_coordinate> <y_coordinate> <facing_direction>
 
-### Project Structure 
+## Project Structure
 
+```
 py-mars-rover/
 ├── input_layer/                    # Input parsing layer
 │   ├── input_types/                # Custom data types
@@ -100,7 +101,7 @@ py-mars-rover/
 ├── main.py                         # Program entry point
 ├── README.md                       # This documentation
 └── .gitignore                      # Git ignore rules
-
+```
 
 
 
