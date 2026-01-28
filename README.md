@@ -119,33 +119,33 @@ py-mars-rover/
 
 ### Design Decisions
 
-1. Layered Architecture
+1. ## Layered Architecture
     The project separates concerns into distinct layers:
 
-    Input Layer: Handles parsing and validation of raw input strings
+    - Input Layer: Handles parsing and validation of raw input strings
 
-    Logic Layer: Contains business logic for rover movement and plateau management
+    - Logic Layer: Contains business logic for rover movement and plateau management
 
     This separation allows either layer to be modified independently, making the system more maintainable and testable.
 
-2. Custom Data Types
+2. ## Custom Data Types
     Instead of using primitive types (strings, integers), the project defines:
 
-    CompassDirection enum for direction validation
+    - CompassDirection enum for direction validation
 
-    Instruction enum for movement command validation
+    - Instruction enum for movement command validation
 
-    Position and PlateauSize dataclasses for structured data
+    - Position and PlateauSize dataclasses for structured data
 
-3. Collision and Boundary Handling
-    Rovers cannot move outside the plateau boundaries
+3. ## Collision and Boundary Handling
+    - Rovers cannot move outside the plateau boundaries
 
-    Rovers cannot occupy the same position simultaneously
+    - Rovers cannot occupy the same position simultaneously
 
-    Invalid moves are silently ignored (rovers stay in place)
+    - Invalid moves are silently ignored (rovers stay in place)
 
-4. Sequential Movement
-Rovers move in the order they are deployed. Each rover must complete its entire instruction sequence before the next rover begins moving.
+4. ## Sequential Movement
+    Rovers move in the order they are deployed. Each rover must complete its entire instruction sequence before the next rover begins moving.
 
 ### Example
 
