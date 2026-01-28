@@ -147,36 +147,42 @@ py-mars-rover/
 4. Sequential Movement
 Rovers move in the order they are deployed. Each rover must complete its entire instruction sequence before the next rover begins moving.
 
-Example
-Input
-text
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
-Rover 1 Journey
-Starting at (1, 2) facing North
+### Example
 
-Instructions: LMLMLMLMM
+## Input
 
-Path: Turn Left → Move West → Turn Left → Move South → Turn Left → Move East → Turn Left → Move North → Move North
+    text
+    5 5
+    1 2 N
+    LMLMLMLMM
+    3 3 E
+    MMRMMRMRRM
 
-Final position: (1, 3) facing North
+## Rover 1 Journey
 
-Rover 2 Journey
-Starting at (3, 3) facing East
+- Starting at (1, 2) facing North
 
-Instructions: MMRMMRMRRM
+- Instructions: LMLMLMLMM
 
-Path: Move East → Move East → Turn Right → Move South → Move South → Turn Right → Move West → Turn Right → Turn Right → Move West
+- Path: Turn Left → Move West → Turn Left → Move South → Turn Left → Move East → Turn Left → Move North → Move North
 
-Final position: (5, 1) facing East
+- Final position: (1, 3) facing North
 
-Output
-text
-1 3 N
-5 1 E
+## Rover 2 Journey
+
+- Starting at (3, 3) facing East
+
+- Instructions: MMRMMRMRRM
+
+- Path: Move East → Move East → Turn Right → Move South → Move South → Turn Right → Move West → Turn Right → Turn Right → Move West
+
+- Final position: (5, 1) facing East
+
+## Output
+
+    text
+    1 3 N
+    5 1 E
 
 
 ### Contributing
