@@ -12,7 +12,7 @@ A Python implementation of the Mars Rover coding challenge, built with test-driv
 - [Design Decisions](#design-decisions)
 - [Example](#example)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Overview
 
@@ -115,3 +115,82 @@ py-mars-rover/
     pytest tests/parser_tests/           # Parser tests
     pytest tests/logic_layer_tests/      # Business logic tests
     pytest tests/test_layer_integration.py  # Integration tests
+
+
+### Design Decisions
+
+1. Layered Architecture
+The project separates concerns into distinct layers:
+
+Input Layer: Handles parsing and validation of raw input strings
+
+Logic Layer: Contains business logic for rover movement and plateau management
+
+This separation allows either layer to be modified independently, making the system more maintainable and testable.
+
+2. Custom Data Types
+Instead of using primitive types (strings, integers), the project defines:
+
+CompassDirection enum for direction validation
+
+Instruction enum for movement command validation
+
+Position and PlateauSize dataclasses for structured data
+
+3. Collision and Boundary Handling
+Rovers cannot move outside the plateau boundaries
+
+Rovers cannot occupy the same position simultaneously
+
+Invalid moves are silently ignored (rovers stay in place)
+
+4. Sequential Movement
+Rovers move in the order they are deployed. Each rover must complete its entire instruction sequence before the next rover begins moving.
+
+Example
+Input
+text
+5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM
+Rover 1 Journey
+Starting at (1, 2) facing North
+
+Instructions: LMLMLMLMM
+
+Path: Turn Left → Move West → Turn Left → Move South → Turn Left → Move East → Turn Left → Move North → Move North
+
+Final position: (1, 3) facing North
+
+Rover 2 Journey
+Starting at (3, 3) facing East
+
+Instructions: MMRMMRMRRM
+
+Path: Move East → Move East → Turn Right → Move South → Move South → Turn Right → Move West → Turn Right → Turn Right → Move West
+
+Final position: (5, 1) facing East
+
+Output
+text
+1 3 N
+5 1 E
+
+
+### Contributing
+
+Fork the repository
+
+Create a feature branch: git checkout -b feature-name
+
+Make your changes and add tests
+
+Run the test suite to ensure all tests pass
+
+Commit your changes: git commit -am 'Add some feature'
+
+Push to the branch: git push origin feature-name
+
+Submit a pull request
