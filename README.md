@@ -6,13 +6,17 @@ A Python implementation of the Mars Rover coding challenge, built with test-driv
 - [Overview](#overview)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
+- [🚀 Quick Start Guide](#-quick-start-guide)
+- [Interactive Terminal Usage](#interactive-terminal-usage)
 - [Project Structure](#project-structure)
 - [Running Tests](#running-tests)
 - [Design Decisions](#design-decisions)
+- [UI Features & Design](#ui-features--design)
 - [Example](#example)
+- [Command Line Options](#command-line-options)
+- [🔧 Troubleshooting](#-troubleshooting)
 - [Contributing](#contributing)
-
+- [🙏 Acknowledgments](#-acknowledgments)
 
 ## Overview
 
@@ -26,6 +30,10 @@ This project simulates NASA's Mars Rover mission control system. Rovers are depl
 - **Multiple Rover Support**: Sequential movement with collision avoidance
 - **Type Safety**: Custom data types and enums for compass directions and instructions
 - **Extensible Design**: Easy to add new features or modify input formats
+- **Interactive Terminal UI**: User-friendly command-line interface with step-by-step guidance
+- **Visual Grid Display**: Optional graphical representation of rover positions using ASCII art
+- **Real-time Visualization**: Watch rovers move step-by-step with visual feedback
+- **Save/Load Missions**: Export results to text files for later reference
 
 ## Installation
 
@@ -38,42 +46,155 @@ This project simulates NASA's Mars Rover mission control system. Rovers are depl
    ```bash
    git clone https://github.com/C-Medina89/py-mars-rover.git
    cd py-mars-rover
+   ```
 
+2. Create a virtual environment (recommended):
+   ```bash
+   python -m venv venv
+   
+   # On macOS/Linux:
+   source venv/bin/activate
+   
+   # On Windows:
+   venv\Scripts\activate
+   ```
 
-2. python -m venv venv (Create a virtual environment)
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+3. Install dependencies:
+   ```bash
+   pip install pytest  # Only pytest is required for testing
+   ```
 
-3. pip install pytest  (Install dependencies)
+## 🚀 Quick Start Guide
 
+### For First-Time Users
+1. **Clone and navigate** to the project:
+   ```bash
+   git clone <repository-url>
+   cd py-mars-rover
+   ```
 
-### Usage
-1. python main.py (Run the program with the example from the brief)
+2. **Run the application**:
+   ```bash
+   python main.py
+   ```
 
-2. Expected output (
-    1 3 N
-    5 1 E
-)
+3. **Follow the prompts**:
+   - Press `y` for visual display (recommended)
+   - Enter `5 5` for plateau size
+   - Press `Enter` to use example rover position
+   - Press `Enter` to use example instructions
+   - Watch the rover move on the visual grid!
 
-3. Custom input :
-    To use custom input, modify the input_data variable in main.py. The expected format is:
-    <plateau_max_x> <plateau_max_y>
-    <rover1_x> <rover1_y> <rover1_direction>
-    <rover1_instructions>
-    <rover2_x> <rover2_y> <rover2_direction>
-    <rover2_instructions>
-    ...
+### For Developers
+1. **Run all tests**:
+   ```bash
+   pytest tests/
+   ```
 
-4. Input Format Details:
+2. **Test specific component**:
+   ```bash
+   pytest tests/logic_layer_tests/test_rover.py
+   ```
 
-    Plateau Size: Two integers representing maximum x and y coordinates (0-based grid)
+3. **Run integration test**:
+   ```bash
+   pytest tests/test_layer_integration.py
+   ```
 
-    Rover Position: Two integers and a direction character (N, S, E, W)
+## Interactive Terminal Usage
 
-    Instructions: String of letters (L, R, M) without spaces
+### Starting the Application
+```bash
+python main.py
+```
 
-5. Output Format:
-    For each rover, the program outputs its final position:
-    <x_coordinate> <y_coordinate> <facing_direction>
+### Example Interactive Session
+```
+==================================================
+🚀 MARS ROVER MISSION CONTROL
+==================================================
+
+👁️  VISUAL DISPLAY OPTION
+-------------------------
+Enable visual display of rovers? (y/n): y
+
+📐 STEP 1: SETUP PLATEAU
+------------------------------
+Enter plateau size (format: 'width height' e.g., '5 5'): 5 5
+
+👁️  Visual display enabled!
+
+========================================
+🛰️  Initial Empty Plateau
+========================================
+Y
+5 [.][.][.][.][.][.]
+4 [.][.][.][.][.][.]
+3 [.][.][.][.][.][.]
+2 [.][.][.][.][.][.]
+1 [.][.][.][.][.][.]
+0 [.][.][.][.][.][.]
+     0  1  2  3  4  5  X
+
+Legend: ↑=N ↓=S →=E ←=W .=Empty
+========================================
+
+🤖 STEP 2: DEPLOY ROVERS
+------------------------------
+
+Rover #1
+Enter Rover #1 starting position (format: 'x y direction' e.g., '1 2 N'): 1 2 N
+Enter Rover #1 instructions (L=Left, R=Right, M=Move): LMLMLMLMM
+
+✓ Rover #1 deployed and moved!
+  Final position: 1 3 N
+
+Add another rover? (y/n): y
+
+Rover #2
+Enter Rover #2 starting position (format: 'x y direction' e.g., '1 2 N'): 3 3 E
+Enter Rover #2 instructions (L=Left, R=Right, M=Move): MMRMMRMRRM
+
+✓ Rover #2 deployed and moved!
+  Final position: 5 1 E
+
+Add another rover? (y/n): n
+
+========================================
+🛰️  Final Rover Positions
+========================================
+Y
+5 [.][.][.][.][.][.]
+4 [.][.][.][.][.][.]
+3 [↑][.][.][.][.][.]
+2 [.][.][.][.][.][.]
+1 [.][.][.][.][→][.]
+0 [.][.][.][.][.][.]
+     0  1  2  3  4  5  X
+
+Legend: ↑=N ↓=S →=E ←=W .=Empty
+========================================
+
+📊 MISSION RESULTS
+========================================
+
+Total rovers deployed: 2
+
+Final positions:
+--------------------
+Rover #1: 1 3 N
+Rover #2: 5 1 E
+
+Save results to file? (y/n): y
+Enter filename (default: 'results.txt'): mission_001.txt
+✓ Results saved to mission_001.txt
+```
+
+### Available Commands
+- Press **Enter** to use default values for first rover
+- Type **'y'** or **'n'** for yes/no questions
+- Enter **empty input** for position/instructions to use example values
+- **Ctrl+C** to abort mission at any time
 
 ## Project Structure
 
@@ -86,13 +207,16 @@ py-mars-rover/
 │   │   ├── plateau_size.py         # PlateauSize dataclass
 │   │   └── position.py             # Position dataclass
 │   └── parsers/                    # String parsers
-│       ├── instruction_parser.py   # Converts "LMR" to [Instruction.LEFT, ...]
-│       ├── plateau_parser.py       # Converts "5 5" to PlateauSize
-│       └── position_parser.py      # Converts "1 2 N" to Position
+│       ├── instruction_parser.py   # Parse movement instructions
+│       ├── plateau_parser.py       # Parse plateau dimensions
+│       ├── position_parser.py      # Parse rover positions
 ├── logic_layer/                    # Business logic layer
-│   ├── plateau.py                  # Plateau with boundary checking
-│   ├── rover.py                    # Rover movement and rotation
-│   └── mission_control.py          # Coordinates multiple rovers
+│   ├── plateau.py                  # Plateau with bounds checking
+│   ├── rover.py                    # Rover movement logic
+│   └── mission_control.py          # Coordinate multiple rovers
+├── ui_layer/                       # NEW: User interface layer
+│   ├── terminal_ui.py              # Interactive terminal interface
+│   └── visual_display.py           # ASCII grid visualization
 ├── tests/                          # Test suite
 │   ├── input_layer_tests/          # Tests for data types
 │   ├── parser_tests/               # Tests for parsers
@@ -103,101 +227,199 @@ py-mars-rover/
 └── .gitignore                      # Git ignore rules
 ```
 
+## Running Tests
 
+### Run All Tests
+```bash
+pytest tests/
+```
 
-### Running Tests
+### Run Specific Test Categories
+```bash
+pytest tests/input_layer_tests/      # Data type tests
+pytest tests/parser_tests/           # Parser tests
+pytest tests/logic_layer_tests/      # Business logic tests
+pytest tests/test_layer_integration.py  # Integration tests
+```
 
-1. Run all tests :
-    pytest tests/
+### Run Tests with Coverage
+```bash
+pytest --cov=. tests/
+```
 
-2. Run specific test categories :
+## Design Decisions
 
-    pytest tests/input_layer_tests/      # Data type tests
-    pytest tests/parser_tests/           # Parser tests
-    pytest tests/logic_layer_tests/      # Business logic tests
-    pytest tests/test_layer_integration.py  # Integration tests
+### 1. Layered Architecture
+The project separates concerns into distinct layers:
 
+- **Input Layer**: Handles parsing and validation of raw input strings
+- **Logic Layer**: Contains business logic for rover movement and plateau management
+- **UI Layer**: Manages user interaction and display (newly added)
 
-### Design Decisions
+This separation allows each layer to be modified independently, making the system more maintainable and testable.
 
-1. ## Layered Architecture
-    The project separates concerns into distinct layers:
+### 2. Custom Data Types
+Instead of using primitive types (strings, integers), the project defines:
 
-    - Input Layer: Handles parsing and validation of raw input strings
+- `CompassDirection` enum for direction validation
+- `Instruction` enum for movement command validation
+- `Position` and `PlateauSize` dataclasses for structured data
 
-    - Logic Layer: Contains business logic for rover movement and plateau management
+### 3. Collision and Boundary Handling
+- Rovers cannot move outside the plateau boundaries
+- Rovers cannot occupy the same position simultaneously
+- Invalid moves are silently ignored (rovers stay in place)
 
-    This separation allows either layer to be modified independently, making the system more maintainable and testable.
+### 4. Sequential Movement
+Rovers move in the order they are deployed. Each rover must complete its entire instruction sequence before the next rover begins moving.
 
-2. ## Custom Data Types
-    Instead of using primitive types (strings, integers), the project defines:
+## UI Features & Design
 
-    - CompassDirection enum for direction validation
+### Visual Display System
+The application includes an optional ASCII-based visual display that shows:
+- **Grid coordinates** with proper orientation (y=0 at bottom)
+- **Rover positions** using directional arrows (↑ ↓ → ←)
+- **Empty cells** represented as dots (.)
+- **Real-time updates** as rovers move
 
-    - Instruction enum for movement command validation
+### User Experience Features
+1. **Progressive Disclosure**: Only asks for needed information
+2. **Smart Defaults**: Press Enter to use example values
+3. **Error Recovery**: Clear error messages with retry options
+4. **Confirmation Prompts**: Yes/No questions with validation
+5. **Mission Saving**: Export results to text files
 
-    - Position and PlateauSize dataclasses for structured data
+### Input Validation
+- **Plateau size**: Must be positive integers
+- **Rover positions**: Must be within plateau bounds
+- **Directions**: Must be N, S, E, or W
+- **Instructions**: Invalid characters are ignored
+- **Collisions**: Prevent rovers from occupying same space
 
-3. ## Collision and Boundary Handling
-    - Rovers cannot move outside the plateau boundaries
+## Example
 
-    - Rovers cannot occupy the same position simultaneously
+### Input (via interactive terminal)
+```
+Plateau: 5 5
+Rover 1: Start at (1, 2) facing North with instructions "LMLMLMLMM"
+Rover 2: Start at (3, 3) facing East with instructions "MMRMMRMRRM"
+```
 
-    - Invalid moves are silently ignored (rovers stay in place)
+### Visual Output
+```
+========================================
+🛰️  Final Rover Positions
+========================================
+Y
+5 [.][.][.][.][.][.]
+4 [.][.][.][.][.][.]
+3 [↑][.][.][.][.][.]   ← Rover 1 at (1,3) facing North
+2 [.][.][.][.][.][.]
+1 [.][.][.][.][→][.]   ← Rover 2 at (5,1) facing East
+0 [.][.][.][.][.][.]
+     0  1  2  3  4  5  X
+```
 
-4. ## Sequential Movement
-    Rovers move in the order they are deployed. Each rover must complete its entire instruction sequence before the next rover begins moving.
+### Text Output
+```
+1 3 N
+5 1 E
+```
 
-### Example
+## Command Line Options
 
-## Input
+### Interactive Mode (Default)
+```bash
+python main.py
+```
 
-    text
-    5 5
-    1 2 N
-    LMLMLMLMM
-    3 3 E
-    MMRMMRMRRM
+### File Input Mode
+Create an `input.txt` file:
+```txt
+5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM
+```
 
-## Rover 1 Journey
+Then run:
+```bash
+python -c "
+from ui_layer.file_ui import FileUI
+ui = FileUI('input.txt', 'output.txt')
+ui.run()
+"
+```
 
-- Starting at (1, 2) facing North
+### Direct Python Execution
+```python
+from ui_layer.terminal_ui import TerminalUI
+ui = TerminalUI()
+ui.run()
+```
 
-- Instructions: LMLMLMLMM
+## 🔧 Troubleshooting
 
-- Path: Turn Left → Move West → Turn Left → Move South → Turn Left → Move East → Turn Left → Move North → Move North
+### Common Issues
 
-- Final position: (1, 3) facing North
+1. **"ModuleNotFoundError: No module named 'ui_layer'"**
+   ```bash
+   # Make sure you're in the project root directory
+   pwd  # Should show: /path/to/py-mars-rover
+   
+   # Check ui_layer folder exists
+   ls -la ui_layer/
+   ```
 
-## Rover 2 Journey
+2. **Visual display looks scrambled**
+   - Ensure your terminal supports UTF-8 characters
+   - Try increasing terminal window size
+   - Disable visual mode with 'n' when prompted
 
-- Starting at (3, 3) facing East
+3. **Rover not moving as expected**
+   - Check that coordinates are within plateau bounds
+   - Verify instructions use only L, R, M characters
+   - Ensure no other rover is blocking the path
 
-- Instructions: MMRMMRMRRM
+4. **Tests failing**
+   ```bash
+   # Run with verbose output
+   pytest tests/ -v
+   
+   # Run specific failing test
+   pytest tests/test_file.py::test_function_name -v
+   ```
 
-- Path: Move East → Move East → Turn Right → Move South → Move South → Turn Right → Move West → Turn Right → Turn Right → Move West
+## Contributing
 
-- Final position: (5, 1) facing East
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes and add tests
+4. Run the test suite to ensure all tests pass
+5. Commit your changes: `git commit -am 'Add some feature'`
+6. Push to the branch: `git push origin feature-name`
+7. Submit a pull request
 
-## Output
+## 🙏 Acknowledgments
 
-    text
-    1 3 N
-    5 1 E
+- **Mars Rover Kata**: Original programming challenge
+- **NASA Mars Exploration Program**: Real-world inspiration
+- **Test-Driven Development**: Methodology for robust code
+- **Clean Architecture**: Principles for maintainable design
+- **Python Community**: For excellent tools and libraries
 
+---
 
-### Contributing
+## 🎯 Learning Outcomes
 
-- Fork the repository
+This project demonstrates:
+1. **Clean Architecture** with separated layers
+2. **Test-Driven Development** practices
+3. **User Experience Design** for CLI applications
+4. **Visualization Techniques** in terminal environments
+5. **Error Handling** and input validation strategies
+6. **Professional Documentation** practices
 
-- Create a feature branch: git checkout -b feature-name
+---
 
-- Make your changes and add tests
-
-- Run the test suite to ensure all tests pass
-
-- Commit your changes: git commit -am 'Add some feature'
-
-- Push to the branch: git push origin feature-name
-
-- Submit a pull request

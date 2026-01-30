@@ -1,0 +1,7 @@
+Mars Rover Mission Results
+==============================
+Plateau: 5x5
+Rovers deployed: 2
+
+Rover #1: 4 3 E
+Rover #2: 2 0 S
