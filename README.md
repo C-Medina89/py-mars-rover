@@ -6,7 +6,7 @@ A Python implementation of the Mars Rover coding challenge, built with test-driv
 - [Overview](#overview)
 - [Features](#features)
 - [Installation](#installation)
-- [🚀 Quick Start Guide](#-quick-start-guide)
+- [Quick Start Guide](#-quick-start-guide)
 - [Interactive Terminal Usage](#interactive-terminal-usage)
 - [Project Structure](#project-structure)
 - [Running Tests](#running-tests)
@@ -14,9 +14,9 @@ A Python implementation of the Mars Rover coding challenge, built with test-driv
 - [UI Features & Design](#ui-features--design)
 - [Example](#example)
 - [Command Line Options](#command-line-options)
-- [🔧 Troubleshooting](#-troubleshooting)
+- [Troubleshooting](#-troubleshooting)
 - [Contributing](#contributing)
-- [🙏 Acknowledgments](#-acknowledgments)
+- [Acknowledgments](#-acknowledgments)
 
 ## Overview
 
@@ -64,7 +64,7 @@ This project simulates NASA's Mars Rover mission control system. Rovers are depl
    pip install pytest  # Only pytest is required for testing
    ```
 
-## 🚀 Quick Start Guide
+## Quick Start Guide
 
 ### For First-Time Users
 1. **Clone and navigate** to the project:
@@ -216,7 +216,7 @@ py-mars-rover/
 │   └── mission_control.py          # Coordinate multiple rovers
 ├── ui_layer/                       # NEW: User interface layer
 │   ├── terminal_ui.py              # Interactive terminal interface
-│   └── visual_display.py           # ASCII grid visualization
+│             
 ├── tests/                          # Test suite
 │   ├── input_layer_tests/          # Tests for data types
 │   ├── parser_tests/               # Tests for parsers
@@ -333,25 +333,6 @@ Y
 python main.py
 ```
 
-### File Input Mode
-Create an `input.txt` file:
-```txt
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
-```
-
-Then run:
-```bash
-python -c "
-from ui_layer.file_ui import FileUI
-ui = FileUI('input.txt', 'output.txt')
-ui.run()
-"
-```
-
 ### Direct Python Execution
 ```python
 from ui_layer.terminal_ui import TerminalUI
@@ -401,7 +382,7 @@ ui.run()
 6. Push to the branch: `git push origin feature-name`
 7. Submit a pull request
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Mars Rover Kata**: Original programming challenge
 - **NASA Mars Exploration Program**: Real-world inspiration
@@ -411,7 +392,7 @@ ui.run()
 
 ---
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 This project demonstrates:
 1. **Clean Architecture** with separated layers
